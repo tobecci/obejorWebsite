@@ -1,7 +1,7 @@
 <?php
 // HTTP
 define('HTTP_SERVER', 'https://www.obejor.com.ng/');
-
+//i added a line
 // HTTPS
 define('HTTPS_SERVER', 'https://www.obejor.com.ng/');
 
