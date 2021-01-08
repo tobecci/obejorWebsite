@@ -49,12 +49,23 @@ class ControllerExtensionModuleLatest extends Controller {
 				} else {
 					$rating = false;
 				}
-
-				$data['products'][] = array(
+                /*	$data['products'][] = array(
 					'product_id'  => $result['product_id'],
 					'thumb'       => $image,
 					'name'        => $result['name'],
 					'description' => utf8_substr(trim(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'))), 0, $this->config->get('theme_' . $this->config->get('config_theme') . '_product_description_length')) . '..',
+					'price'       => $price,
+					'special'     => $special,
+					'tax'         => $tax,
+					'rating'      => $rating,
+					'href'        => $this->url->link('product/product', 'product_id=' . $result['product_id'])
+				);*/
+				
+				$data['products'][] = array(
+					'product_id'  => $result['product_id'],
+					'thumb'       => $image,
+					'name'        => $result['name'],
+					'meta_description' => utf8_substr(trim(strip_tags(html_entity_decode($result['meta_description'], ENT_QUOTES, 'UTF-8'))), 0, $this->config->get('theme_' . $this->config->get('config_theme') . '_product_description_length')) . '..',
 					'price'       => $price,
 					'special'     => $special,
 					'tax'         => $tax,
@@ -67,3 +78,5 @@ class ControllerExtensionModuleLatest extends Controller {
 		}
 	}
 }
+
+

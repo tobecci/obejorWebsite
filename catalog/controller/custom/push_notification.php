@@ -110,7 +110,6 @@
       $this->load->model('custom/push_notification');
       $subscriptionId =  $this->request->post['subscriptionid'];
       $notificationId =  $this->request->post['notificationid'];
-      var_dump('notificationid',$notificationId);
       $res = $this->model_custom_push_notification->updateNotificationRecieves($notificationId);
       $res = $this->model_custom_push_notification->updateSubscriberNotificationRecieves($subscriptionId);
       $this->response->addHeader('Content-Type: application/json');

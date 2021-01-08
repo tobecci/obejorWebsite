@@ -48,18 +48,18 @@
             <label class="col-sm-2 control-label">{{ entry_audience }}</label>
             <div class="col-sm-10">
                 <select type="text" name="audience" value="{{ audience }}" placeholder="{{ entry_audience }}" class="form-control" >
-                  {% if audience == ' buyers' %}
+                  {% if audience == ' buyer' %}
                     <option value="all">All</option>
-                    <option value="buyers" selected>Buyers</option>
-                    <option value="sellers">Sellers</option>
-                  {% elseif audience == 'sellers' %}
+                    <option value="buyer" selected>Buyers</option>
+                    <option value="seller">Sellers</option>
+                  {% elseif audience == 'seller' %}
                     <option value="all">All</option>
-                    <option value="buyers"Buyers</option>
-                    <option value="sellers" selected>>Sellers</option>
+                    <option value="buyer">Buyers</option>
+                    <option value="seller" selected>Sellers</option>
                   {% else %}
                     <option value="all" selected>All</option>
-                    <option value="buyers">Buyers</option>
-                    <option value="sellers">Sellers</option>
+                    <option value="buyer">Buyers</option>
+                    <option value="seller">Sellers</option>
                   {% endif %}
                 </select>
               {% if error_audience %}
@@ -146,12 +146,18 @@
             <label class="col-sm-2 control-label">{{ entry_mobile_link_type }}</label>
             <div class="col-sm-10">
               <select type="text" name="mobile_link_type" id="mobile_link_type" value="{{ mobile_link_type }}" placeholder="{{ entry_mobile_link_type }}" class="form-control" >
-                  {% if mobile_link_type == 'product' %}
+                  {% if mobile_link_type == 'section' %}
+                    <option value="product" >Product</option>
+                    <option value="category">Category</option>
+                    {#<option value="section" selected>Module</option>#}
+                  {% elseif mobile_link_type == 'category' %}
+                    <option value="product" >Product</option>
+                    <option value="category"selected>Category</option>
+                    {#<option value="section">Module</option>#}
+                  {% else %}
                     <option value="product" selected>Product</option>
                     <option value="category">Category</option>
-                  {% else %}
-                    <option value="product">Product</option>
-                    <option value="category" selected>Category</option>
+                    {#<option value="section">Module</option>#}
                   {% endif %}
                 </select>
               {% if error_mobile_link_type %}
@@ -228,6 +234,7 @@ $('input[name=\'mobile_link_name\']').autocomplete({
 	},
 	select: function(item) {
 		this.value = item.label;
+		console.log(item.label)
 		$('#mobile_link').val(item.value);	
 	}
 });

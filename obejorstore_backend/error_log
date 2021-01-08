@@ -1543,3 +1543,13 @@ Stack trace:
 #3 /home/obejorng/public_html/obejorstore_backend/index.php(23): start('admin')
 #4 {main}
   thrown in /home/obejorng/public_html/system/library/db/mysqli.php on line 10
+[02-Dec-2020 20:58:21 Africa/Lagos] PHP Fatal error:  Allowed memory size of 1073741824 bytes exhausted (tried to allocate 72 bytes) in /home/obejorng/public_html/system/library/db/mysqli.php on line 25
+[02-Dec-2020 20:59:32 Africa/Lagos] PHP Fatal error:  Allowed memory size of 1073741824 bytes exhausted (tried to allocate 83 bytes) in /home/obejorng/public_html/system/library/db/mysqli.php on line 24
+[02-Dec-2020 21:52:11 Africa/Lagos] PHP Fatal error:  Allowed memory size of 1073741824 bytes exhausted (tried to allocate 32 bytes) in /home/obejorng/public_html/system/library/db/mysqli.php on line 24
+[03-Dec-2020 19:08:27 Africa/Lagos] PHP Fatal error:  Allowed memory size of 1073741824 bytes exhausted (tried to allocate 77 bytes) in /home/obejorng/public_html/system/library/db/mysqli.php on line 24
+[03-Dec-2020 19:09:39 Africa/Lagos] PHP Fatal error:  Allowed memory size of 1073741824 bytes exhausted (tried to allocate 72 bytes) in /home/obejorng/public_html/system/library/db/mysqli.php on line 25
+[03-Dec-2020 19:16:15 Africa/Lagos] PHP Fatal error:  Allowed memory size of 1073741824 bytes exhausted (tried to allocate 72 bytes) in /home/obejorng/public_html/system/library/db/mysqli.php on line 25
+[03-Dec-2020 19:19:15 Africa/Lagos] PHP Fatal error:  Allowed memory size of 1073741824 bytes exhausted (tried to allocate 77 bytes) in /home/obejorng/public_html/system/library/db/mysqli.php on line 24
+[03-Dec-2020 19:20:48 Africa/Lagos] PHP Fatal error:  Allowed memory size of 1073741824 bytes exhausted (tried to allocate 72 bytes) in /home/obejorng/public_html/system/library/db/mysqli.php on line 24
+[03-Dec-2020 19:25:01 Africa/Lagos] PHP Fatal error:  Allowed memory size of 1073741824 bytes exhausted (tried to allocate 64 bytes) in /home/obejorng/public_html/system/library/db/mysqli.php on line 24
+[03-Dec-2020 19:26:56 Africa/Lagos] PHP Fatal error:  Allowed memory size of 1073741824 bytes exhausted (tried to allocate 79 bytes) in /home/obejorng/public_html/system/library/db/mysqli.php on line 24

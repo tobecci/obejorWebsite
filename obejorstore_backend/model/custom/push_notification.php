@@ -389,10 +389,11 @@
      * @return type
      * @throws conditon
      **/
-    public function sendSellerPushNotification($sellerid,$message,$title,$data,$image = '')
+    public function sendSellerPushNotification($sellerid,$message,$title,$data,$image = '', $platform = 'buyer')
     {
         $tokenrows =  $this->getUserTokens($sellerid,'seller');
         $response = array();
+        $key = $platform == 'buyer' ? "AAAAYMEnM8I:APA91bHPHwbavxzJxExd1sFk79BZRGnyPj9DvtzUiY8fddPPOuYHwoCAlLfbHmnpLolZkdr2W55YbtCywkYwmanGhz7kc4WTi3o3Ordqj1KskhNv5t7rW4N3Q6EmbjzVIOgclewXiLgW" : "AAAACtGgOmo:APA91bFT0kLPzmudlQwBtx2ROoVMC66bp3svIueJK3zvgpFEeXbcMN88hU3DP_ihBeV8PgvOI9uLyaQ9RufIKoSwCQqPAyXzcbpmzXwax-eeB0eKxwMClHPkb8L98hzOY6LFMup6FRu4";
         $data['page'] = $data['page'] == null && $data['type'] != null ? $data['type'] : $data['page'];
         foreach($tokenrows as $token){
             $recipients = $token['user_token'];
@@ -417,7 +418,8 @@
                 ),
                 'data' => $data 
             );
-            $headers = array('Authorization:key=AAAACtGgOmo:APA91bFT0kLPzmudlQwBtx2ROoVMC66bp3svIueJK3zvgpFEeXbcMN88hU3DP_ihBeV8PgvOI9uLyaQ9RufIKoSwCQqPAyXzcbpmzXwax-eeB0eKxwMClHPkb8L98hzOY6LFMup6FRu4', 'Content-Type:application/json' );
+            $headers = array("Authorization:key=$key", 'Content-Type:application/json' );
+            var_dump($headers);
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_POST, true);
@@ -447,9 +449,11 @@
      * @param Array $data Other data
      * 
      * **/
-    public function sendMobilePushNotification($recipients,$message,$title,$data,$image = '')
+    public function sendMobilePushNotification($recipients,$message,$title,$data,$image = '',$platform = "buyer")
     {
+
         $response = array();
+        $url = "https://fcm.googleapis.com/fcm/send";
         $data['image'] = $image;
         $arrayToSend = array(
             'to' => $recipients,
@@ -464,7 +468,8 @@
             ),
             'data' => $data 
         );
-        $headers = array('Authorization:key=AAAACtGgOmo:APA91bFT0kLPzmudlQwBtx2ROoVMC66bp3svIueJK3zvgpFEeXbcMN88hU3DP_ihBeV8PgvOI9uLyaQ9RufIKoSwCQqPAyXzcbpmzXwax-eeB0eKxwMClHPkb8L98hzOY6LFMup6FRu4', 'Content-Type:application/json' );
+        $key = $platform == 'buyer' ? "AAAAYMEnM8I:APA91bHPHwbavxzJxExd1sFk79BZRGnyPj9DvtzUiY8fddPPOuYHwoCAlLfbHmnpLolZkdr2W55YbtCywkYwmanGhz7kc4WTi3o3Ordqj1KskhNv5t7rW4N3Q6EmbjzVIOgclewXiLgW" : "AAAACtGgOmo:APA91bFT0kLPzmudlQwBtx2ROoVMC66bp3svIueJK3zvgpFEeXbcMN88hU3DP_ihBeV8PgvOI9uLyaQ9RufIKoSwCQqPAyXzcbpmzXwax-eeB0eKxwMClHPkb8L98hzOY6LFMup6FRu4";
+        $headers = array("Authorization:key=$key", 'Content-Type:application/json' );
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POST, true);
@@ -476,6 +481,8 @@
         curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4 );
         curl_setopt($ch, CURLOPT_POSTFIELDS,json_encode($arrayToSend));
         $result = curl_exec($ch);
+        // var_dump($result);
+        // exit;
         curl_close($ch);
         array_push($response,json_decode($result,true));
         

@@ -2,6 +2,7 @@
   class ControllerApiPushNotifications extends Controller {
     public function subscribe () {
       $this->load->model('custom/push_notification');
+     
       $userid   = $this->request->post['customer_id'];
       $token    = $this->request->post['token'];
       $platform = $this->request->post['platform'] ?? 'mobile'; 
@@ -15,20 +16,6 @@
       }
       $this->response->addHeader('Content-Type: application/json');
 	  $this->response->setOutput(json_encode($json));
-    }
-
-    /**
-     * undocumented function summary
-     *
-     * Undocumented function long description
-     *
-     * @param Type $var Description
-     * @return type
-     * @throws conditon
-     **/
-    public function key(Type $var = null)
-    {
-      echo 'hello bitch';
     }
     
     public function unsubscribe(){

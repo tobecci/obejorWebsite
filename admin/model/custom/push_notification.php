@@ -372,6 +372,9 @@
         curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4 );
         curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
         $result = curl_exec($ch);
+        
+        var_dump($result);
+        exit;
         curl_close($ch);
         return $result;
     }
@@ -474,7 +477,9 @@
         $result = curl_exec($ch);
         curl_close($ch);
         array_push($response,json_decode($result,true));
-        
+                
+        var_dump($result);
+        exit;
         return json_encode($response);
     }
     /**
@@ -505,7 +510,7 @@
 
         $webPush = new WebPush($auth);
 
-        $report = $webPush->sendOneNotification( $subscription,'{"id":"'.$notificationId.'","subscriptionid":"'.$subscriptionId.'", "message":"'.$message.'", "title": "'.$title.'","image":"'.$image.'","url":"'.$url.'"}',);
+        $report = $webPush->sendOneNotification( $subscription,'{"id":"'.$notificationId.'","subscriptionid":"'.$subscriptionId.'", "message":"'.$message.'", "title": "'.$title.'","image":"'.$image.'","url":"'.$url.'"}');
 
         // handle eventual errors here, and remove the subscription from your server if it is expired
         $endpoint = $report->getRequest()->getUri()->__toString();

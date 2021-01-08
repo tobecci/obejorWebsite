@@ -17,7 +17,7 @@
       {% set class = 'col-sm-12' %}
     {% endif %}
     <div id="content" class="{{ class }}"> {{ content_top }}
-      <h2 class="secondary-title">{{ heading_title }}</h2>
+      <h2 class="secondary-title"></h2>  <?php /*{{ heading_title }}*/ ?>
       <p>{{ text_description }}</p>
       <form action="{{ action }}" method="post" enctype="multipart/form-data" class="form-horizontal">
         <fieldset>

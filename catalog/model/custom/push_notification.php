@@ -24,10 +24,15 @@
     
      public function addNotificationSubcriber($userId,$token,$accounttype = 'buyer',$platform = 'mobile'){
         $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "push_subscribers WHERE token = '".$token."'");
-		    if(count($query->row) > 0) return false;
-        $this->db->query("INSERT INTO " . DB_PREFIX . "push_subscribers SET customer_id = '".(int)$userId."', token = '".$token. "', usertype = '".$accounttype."',platform =  '".$platform."'");
-        $insertId = $this->db->getLastId();
-        return $insertId;
+	    if(count($query->row) > 0 && $userId){
+	        $sql = "ÜPDATE " . DB_PREFIX . "push_subscribers  SET customer_id ='".(int)$userId."' WHERE token = '".$token."'";
+	        $query = $this->db->query($sql);
+	    }else if(count($query->row) < 1 && strlen($token) > 0){
+	        $this->db->query("INSERT INTO " . DB_PREFIX . "push_subscribers SET customer_id = '".(int)$userId."', token = '".$token. "', usertype = '".$accounttype."',platform =  '".$platform."'");
+            $insertId = $this->db->getLastId();
+            return $insertId;
+	    }
+	    return false;
      }
      
      public function getUserTokens($userId,$accounttype = 'buyer',$platform = 'mobile'){
@@ -61,7 +66,7 @@
     
     public function updateSuscriberNotificationClicks($subscriptionId)
     {
-      $query = $this->db->query("UPDATE  " . DB_PREFIX . "push_subscribers SET clicked = clicked + 1 WHERE id = '" . (int)$subscriptionId ."'");
+      $query = $this->db->query("UPDATE  " . DB_PREFIX . "push_subscribers SET clicked = clicked + 1 WHERE id = '" . (int)$subscriptionId ."' OR token = '".$subscriptionId."'");
       return;
     }
     public function updateNotificationRecieves($scheduleId)
@@ -71,7 +76,7 @@
     }
     public function updateSubscriberNotificationRecieves($subscriptionId)
     {
-      $query = $this->db->query("UPDATE  " . DB_PREFIX . "push_subscribers SET recieved = recieved + 1 WHERE id = '" . $this->db->escape($subscriptionId) ."'");
+      $query = $this->db->query("UPDATE  " . DB_PREFIX . "push_subscribers SET recieved = recieved + 1 WHERE id = '" . $this->db->escape($subscriptionId) ."' OR token = '".$subscriptionId."'");
       return;
     }
     

@@ -13,6 +13,7 @@ $_['text_unsubscribed']       = 'Unsubscribed';
 $_['text_schedules']          = 'Schedules';
 $_['text_schedule']           = 'Schedule Notification';
 $_['text_reschedule']         = 'Reschedule Notification';
+$_['text_add']                = 'Schedule Notification';
 $_['text_edit']               = 'Edit Schedule';
 $_['text_cancel']             = 'Cancel';
 $_['text_filter']             = 'Filter';
@@ -76,7 +77,13 @@ $_['entry_broadcast_now']     = 'Broadcast now';
 
 // Error
 $_['error_permission']          = 'Warning: You do not have permission to modify countries!';
-$_['error_name']                = 'Campaign title cannot be empty and must be between 1-200';
+$_['error_name']                = 'Campaign title cannot be empty and must be between 1-200 characters';
+$_['error_message']             = 'Campaign message cannot be more than 300 characters';
+$_['error_audience']            = 'Please select campaign audience';
+$_['error_platform']            = 'Please select broadcast platform';
+$_['error_image']               = 'Please select a campaign image';
+$_['error_mobile_link']         = 'Please select campaign link for mobile devices';
+$_['error_broadcast_date']      = 'Please select a broadcast date';
 
 $_['button_print_subscribers']  = 'Print subscribers';
 $_['button_print_schedules']    = 'Print subscribers';

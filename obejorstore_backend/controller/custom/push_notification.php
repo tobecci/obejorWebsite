@@ -311,6 +311,9 @@
           $url .= '&page=' . $this->request->get['page'];
         }
         
+        // var_dump($this->request->post);
+        // exit;
+        
         $this->response->redirect($this->url->link('custom/push_notification/schedules', 'user_token=' . $this->session->data['user_token'] . $url, true));
       }
 
@@ -328,16 +331,24 @@
      **/
     public function edit()
     {
+        
+        //         var_dump('called edit');
+        // exit;
       $this->load->language('custom/push_notification');
       $this->load->model('custom/push_notification');
+      
       if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
+        
         if($notification['status'] !=  'pending'){
           $scheduleId = $this->model_custom_push_notification->addNotification($this->request->post);
           $this->session->data['success'] = $this->language->get('text_add_success');
         }else{
           $this->model_custom_push_notification->updateNotification($this->request->get['schedule_id'],$this->request->post);
         }
-  
+         if($this->request->post['broadcast_now']){
+          $scheduleId = $this->request->get['schedule_id'];
+          $this->broadcastNotification($scheduleId);
+        }
         $this->session->data['success'] = $this->language->get('text_edit_success');
   
         $url = '';
@@ -353,7 +364,8 @@
         if (isset($this->request->get['page'])) {
           $url .= '&page=' . $this->request->get['page'];
         }
-    
+        // var_dump($this->request->post);
+        // exit;
         $this->response->redirect($this->url->link('custom/push_notification/schedules', 'user_token=' . $this->session->data['user_token'] . $url, true));
       }
       $this->getForm();
@@ -639,7 +651,7 @@
       $this->load->language('custom/push_notification');
       $this->load->model('custom/push_notification');
       $scheduleId = $this->request->get['schedule_id'];
-      
+
       $this->broadcastNotification($scheduleId);
 
       $this->session->data['success'] = $this->language->get('text_broadcast_success');
@@ -649,9 +661,12 @@
 
     private  function broadcastNotification($scheduleId){
       $notification = $this->model_custom_push_notification->getNotification($scheduleId);
+
       if($notification){
         if($notification['status'] !=  'pending'){
           $notification['image'] = $notification['image_url'];
+          $notification['broadcast_date'] = date("Y-m-d H:i:s");
+          
           $scheduleId = $this->model_custom_push_notification->addNotification($notification);
           $this->session->data['success'] = $this->language->get('text_add_success');
         }
@@ -660,16 +675,19 @@
           'platform'=> $notification['platform']
         ];
         $subscribers = $this->model_custom_push_notification->getAllSubscribers($filter);
+       
         $browserSubscribers = [];
         $mobileSubscribers = [];
         $webtokens = [];
         $this->load->model('tool/image');
+
         foreach ($subscribers as $subscriber) {
           if($subscriber['platform'] == 'mobile'){
             $mobileSubscribers[] = $subscriber['token'];
             $data = [
               'page'=>$notification['mobile_link_type'],
               'id'=>$notification['mobile_link'],
+              'notificationid'=>$scheduleId,
             ];
             $res = $this->model_custom_push_notification->sendMobilePushNotification($subscriber['token'],$notification['message'],$notification['title'],$data,$this->model_tool_image->resize($notification['image_url'],400,300));
           }else{
@@ -678,6 +696,7 @@
         };
         if(count($webtokens) > 0){$this->model_custom_push_notification->sendWebPush($webtokens,$scheduleId,$notification['message'],$notification['title'],$this->model_tool_image->resize($notification['image_url'],1350,600),$notification['web_link']);}
       }
+
       $this->model_custom_push_notification->updatePushNotificationStatus($scheduleId,'published');
       $this->session->data['success'] = $this->language->get('text_broadcast_success');
     }

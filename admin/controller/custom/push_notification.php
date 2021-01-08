@@ -12,6 +12,8 @@
      **/
     public function subscribers()
     {
+        var_dump(134);
+        exit;
       $this->load->language('custom/push_notification');
       $this->document->setTitle($this->language->get('heading_title'));
 
@@ -134,6 +136,8 @@
      **/
     public function schedules()
     {
+        var_dump(134);
+        exit;
       $this->load->language('custom/push_notification');
       $this->document->setTitle($this->language->get('heading_title'));
 
@@ -283,6 +287,8 @@
      **/
     public function add()
     {
+        var_dump(134);
+        exit;
       $this->load->language('custom/push_notification');
       $this->load->model('custom/push_notification');
       $this->document->setTitle($this->language->get('heading_title'));
@@ -328,6 +334,8 @@
      **/
     public function edit()
     {
+         var_dump(134);
+        exit;
       $this->load->language('custom/push_notification');
       $this->load->model('custom/push_notification');
       if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
@@ -371,6 +379,8 @@
      **/
     protected function getForm()
     {
+        var_dump(134);
+        exit;
       $data['text_form'] = !isset($this->request->get['schedule_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
 
       if (isset($this->error['warning'])) {
@@ -567,6 +577,8 @@
      **/
     public function validateForm()
     {
+        var_dump(134);
+        exit;
       if (!$this->user->hasPermission('modify', 'custom/push_notification')) {
         $this->error['warning'] = $this->language->get('error_permission');
       }
@@ -618,6 +630,8 @@
      **/
     public function broadcast()
     {
+        var_dump(134);
+        exit;
       $this->load->language('custom/push_notification');
       $this->load->model('custom/push_notification');
       $scheduleId = $this->request->get['schedule_id'];
@@ -630,6 +644,8 @@
 
 
     private  function broadcastNotification($scheduleId){
+        var_dump($scheduleId);
+        exit;
       $notification = $this->model_custom_push_notification->getNotification($scheduleId);
       if($notification){
         if($notification['status'] !=  'pending'){
@@ -642,6 +658,8 @@
           'platform'=> $notification['platform']
         ];
         $subscribers = $this->model_custom_push_notification->getAllSubscribers($filter);
+        var_dump($subscribers);
+        exit;
         $browserSubscribers = [];
         $mobileSubscribers = [];
         $this->load->model('tool/image');
@@ -651,6 +669,7 @@
             $data = [
               'page'=>$notification['mobile_link_type'],
               'id'=>$notification['mobile_link'],
+              'image'=>$this->model_tool_image->resize($notification['image_url'],400,300)
             ];
             $res = $this->model_custom_push_notification->sendMobilePushNotification($subscriber['token'],$notification['message'],$notification['title'],$data,$this->model_tool_image->resize($notification['image_url'],400,300));
           }else{

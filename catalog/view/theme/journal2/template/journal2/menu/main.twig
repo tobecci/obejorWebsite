@@ -35,7 +35,7 @@
             {% for submenu_item in menu_item.items %}
               <div class="mega-menu-item {{ menu_item.classes }} {{ menu_item.show_class }}">
                 <div>
-                  <h3><a href="{{ submenu_item.href }}">{{ submenu_item.name }}</a></h3>
+                  <h1 style="font-size:15px;"><a href="{{ submenu_item.href }}">{{ submenu_item.name }}</a></h1>
                   <div>
                     {% if menu_item.show in ['image', 'both'] %}
                       <a href="{{ submenu_item.href }}"><img width="{{ submenu_item.image_width }}" height="{{ submenu_item.image_height }}" class="lazy" src="{{ submenu_item.dummy }}" data-src="{{ submenu_item.image }}" data-default-src="{{ submenu_item.image }}" alt="{{ submenu_item.name }}"/></a>
@@ -138,7 +138,7 @@
               <div class="mega-menu-item {{ menu_item.classes }}">
                 <div>
                   {% if submenu_item.show != 'image' and submenu_item.name %}
-                    <h3><a href="{{ submenu_item.href }}">{{ submenu_item.name }}</a></h3>
+                    <h1 style="font-size:15px;"><a href="{{ submenu_item.href }}">{{ submenu_item.name }}</a></h1>
                   {% endif %}
                   <div>
                     {% if submenu_item.show != 'text' %}
@@ -173,9 +173,9 @@
                 <div>
                   {% if block.title %}
                     {% if block.link %}
-                      <h3><a href="{{ block.link }}">{{ block.title }}</a></h3>
+                      <h1 style="font-size:15px;"><a href="{{ block.link }}">{{ block.title }}</a></h1>
                     {% else %}
-                      <h3>{{ block.title }}</h3>
+                      <h1 style="font-size:15px;">{{ block.title }}</h1>
                     {% endif %}
                   {% endif %}
                   {% if block.text %}
@@ -204,7 +204,7 @@
                   {% for submenu_item in menu_column.items %}
                     <div class="mega-menu-item {{ menu_column.classes }} {{ menu_column.show_class }}">
                       <div>
-                        <h3><a href="{{ submenu_item.href }}">{{ submenu_item.name }}</a></h3>
+                        <h1 style="font-size:15px;"><a href="{{ submenu_item.href }}">{{ submenu_item.name }}</a></h1>
                         <div>
                           {% if menu_column.show in ['image', 'both'] %}
                             <a href="{{ submenu_item.href }}"><img width="{{ submenu_item.image_width }}" height="{{ submenu_item.image_height }}" class="lazy" src="{{ submenu_item.dummy }}" data-src="{{ submenu_item.image }}" data-default-src="{{ submenu_item.image }}" alt="{{ submenu_item.name }}"/></a>
@@ -242,7 +242,7 @@
                 {% endfor %}
                 <div>
                   {% if menu_column.name %}
-                    <h3>{{ menu_column.name }}</h3>
+                    <h1 style="font-size:15px;">{{ menu_column.name }}</h1>
                   {% endif %}
                   {% for product in menu_column.items %}
                     {% if menu_column.limit == 0 or (menu_column.limit > 0 and menu_column.limit >= loop.index) %}
@@ -315,13 +315,13 @@
                 {% endfor %}
                 <div>
                   {% if menu_column.name %}
-                    <h3>{{ menu_column.name }}</h3>
+                    <h1 style="font-size:15px;">{{ menu_column.name }}</h1>
                   {% endif %}
                   {% for submenu_item in menu_column.items %}
                     <div class="mega-menu-item {{ menu_column.classes }}">
                       <div>
                         {% if submenu_item.show != 'image' and submenu_item.name %}
-                          <h3><a href="{{ submenu_item.href }}">{{ submenu_item.name }}</a></h3>
+                          <h1 style="font-size:15px;"><a href="{{ submenu_item.href }}">{{ submenu_item.name }}</a></h1>
                         {% endif %}
                         <div>
                           {% if submenu_item.show != 'text' %}
@@ -351,7 +351,7 @@
                 {% endfor %}
                 <div>
                   {% if menu_column.name %}
-                    <h3>{{ menu_column.name }}</h3>
+                    <h1 style="font-size:15px;">{{ menu_column.name }}</h1>
                   {% endif %}
                   <div class="wrapper">
                     {{ menu_column.html_text }}
